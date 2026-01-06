@@ -2,458 +2,446 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Christian Breaux </title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Christian Breaux</title>
   <meta name="description" content="Christian Breaux — photo & video production." />
 
   <style>
- * { box-sizing: border-box; }
+    :root{
+      --text:#111;
+      --muted:#666;
+      --border:rgba(0,0,0,.12);
+      --bg:#fff;
+      --panel:#fff;
+    }
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background: #ffffff;
-  color: #111;
-  line-height: 1.5;
-}
+    *{ box-sizing:border-box; }
+    html, body { height: 100%; }
 
-header {
-  padding: 90px 40px 40px;
-  text-align: center;
-}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.5;
+    }
 
-header h1 {
-  margin: 0;
-  font-size: clamp(34px, 6vw, 60px);
-  font-weight: 500;
-  letter-spacing: -0.04em;
-}
+    /* --- Topbar --- */
+    .topbar{
+      position:fixed;
+      top:0; left:0; right:0;
+      padding:18px 22px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:rgba(255,255,255,.75);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(0,0,0,.06);
+      z-index:50;
+    }
 
-header p {
-  margin-top: 14px;
-  font-size: 18px;
-  color: #666;
-}
+    .brand{
+      font-size:14px;
+      letter-spacing:.02em;
+      color:var(--text);
+      text-decoration:none;
+    }
 
-.info {
-  display: inline-block;
-  margin-top: 32px;
-  padding: 10px 18px;
-  border: 1px solid #ddd;
-  border-radius: 999px;
-  font-size: 14px;
-  text-decoration: none;
-  color: #111;
-  transition: all 0.2s ease;
-  background: #fff;
-  cursor: pointer;
-}
+    .navlinks{ display:flex; gap:10px; align-items:center; }
 
-.info:hover {
-  background: #111;
-  color: #fff;
-  border-color: #111;
-}
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:9px 14px;
+      border:1px solid #ddd;
+      border-radius:999px;
+      font-size:13px;
+      text-decoration:none;
+      color:var(--text);
+      background:#fff;
+      cursor:pointer;
+      transition:background .2s ease, border-color .2s ease, color .2s ease;
+    }
+    .pill:hover{ background:#111; color:#fff; border-color:#111; }
 
-.media {
-  max-width: 1400px;
-  margin: 44px auto 90px;
-  padding: 0 28px;
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 22px;
-}
+    /* --- Header --- */
+    header{
+      padding:120px 40px 36px; /* room for fixed nav */
+      text-align:center;
+    }
 
-/* default: 2-up look on desktop */
-.media > * {
-  grid-column: span 6;
-}
+    header h1{
+      margin:0;
+      font-size:clamp(34px,6vw,60px);
+      font-weight:500;
+      letter-spacing:-.04em;
+    }
 
-/* flow: stagger rows slightly */
-@media (min-width: 900px) {
-  .media > *:nth-child(3n + 2) { margin-top: 18px; }
-  .media > *:nth-child(3n)     { margin-top: 36px; }
-}
+    header p{
+      margin:14px 0 0;
+      font-size:18px;
+      color:var(--muted);
+    }
 
-/* media styling */
-.media img,
-.media video {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  background: #f2f2f2;
-  /* remove rounded edges */
-  border-radius: 0;
-}
+    /* --- Section title --- */
+    .section-title{
+      max-width:1000px;
+      margin:10px auto 0;
+      padding:0 24px;
+      font-size:13px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#777;
+    }
 
-/* responsive */
-@media (max-width: 900px) {
-  .media { grid-template-columns: 1fr; gap: 18px; padding: 0 18px; }
-  .media > * { grid-column: auto; margin-top: 0; }
-}
+    /* --- Stationary scroll box (single column) --- */
+    .media-scroll{
+      max-width:1000px;
+      margin:28px auto 90px;
+      padding:0 28px;
+    }
 
-}
+    .media-scroll__inner{
+      height:min(70vh, 720px);
+      overflow-y:auto;
+      overflow-x:hidden;
 
-}
+      display:grid;
+      grid-template-columns:1fr;
+      gap:18px;
 
-footer {
-  text-align: center;
-  padding: 40px 24px 60px;
-  font-size: 14px;
-  color: #777;
-}
+      padding:18px;
+      border:1px solid var(--border);
+      background:var(--panel);
 
-/* --- Minimal top nav --- */
-.topbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 18px 22px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(255,255,255,0.75);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0,0,0,0.06);
-  z-index: 50;
-}
+      scroll-behavior:smooth;
+      -webkit-overflow-scrolling:touch;
+    }
 
-.brand {
-  font-size: 14px;
-  letter-spacing: 0.02em;
-  color: #111;
-  text-decoration: none;
-}
+    .media-scroll__inner img,
+    .media-scroll__inner video{
+      width:100%;
+      height:auto;
+      display:block;
+      background:#f2f2f2;
+      border-radius:0; /* sharp edges */
+    }
 
-.navlinks {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
+    /* Optional: subtle scrollbar (desktop) */
+    @media (hover:hover){
+      .media-scroll__inner::-webkit-scrollbar{ width:10px; }
+      .media-scroll__inner::-webkit-scrollbar-thumb{
+        background:rgba(0,0,0,.20);
+        border-radius:999px;
+      }
+      .media-scroll__inner::-webkit-scrollbar-track{ background:transparent; }
+    }
 
-.pill {
-  display: inline-block;
-  padding: 9px 14px;
-  border: 1px solid #ddd;
-  border-radius: 999px;
-  font-size: 13px;
-  text-decoration: none;
-  color: #111;
-  transition: all 0.2s ease;
-  background: #fff;
-  cursor: pointer;
-}
+    /* --- Footer --- */
+    footer{
+      text-align:center;
+      padding:40px 24px 60px;
+      font-size:14px;
+      color:#777;
+    }
 
-.pill:hover {
-  background: #111;
-  color: #fff;
-  border-color: #111;
-}
+    /* --- Drawer --- */
+    .drawer-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.35);
+      display:none;
+      z-index:90;
+    }
+    .drawer-overlay.open{ display:block; }
 
-/* Give room for fixed topbar */
-header { padding-top: 120px; }
+    .drawer{
+      position:fixed;
+      left:0; right:0;
+      bottom:-460px;
+      background:#fff;
+      border-top:1px solid rgba(0,0,0,.08);
+      border-radius:22px 22px 0 0;
+      padding:22px 22px 26px;
+      z-index:95;
+      transition:bottom .25s ease;
+    }
+    .drawer.open{ bottom:0; }
 
-/* --- Featured / section headings --- */
-.section-title {
-  max-width: 1200px;
-  margin: 10px auto 0;
-  padding: 0 24px;
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #777;
-}
+    .drawer-close{
+      position:absolute;
+      right:16px;
+      top:14px;
+    }
 
-/* --- Lightbox --- */
-.lightbox {
-  position: fixed;
-  inset: 0;
-  background: rgba(10,10,10,0.92);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-  padding: 30px;
-}
+    .drawer-inner{
+      max-width:900px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:1.3fr 1fr;
+      gap:18px;
+    }
 
-.lightbox.open { display: flex; }
+    .drawer h2{
+      margin:0 0 8px;
+      font-size:18px;
+      font-weight:520;
+      letter-spacing:-.02em;
+    }
 
-.lightbox img {
-  max-width: min(1100px, 92vw);
-  max-height: 80vh;
-  border-radius: 16px;
-  object-fit: contain;
-  background: #111;
-}
+    .drawer p{
+      margin:0 0 10px;
+      color:#444;
+      font-size:14px;
+    }
 
-.lb-close,
-.lb-prev,
-.lb-next {
-  position: absolute;
-  border: 1px solid rgba(255,255,255,0.25);
-  background: rgba(255,255,255,0.10);
-  color: #fff;
-  border-radius: 999px;
-  padding: 10px 14px;
-  cursor: pointer;
-  user-select: none;
-  font-size: 14px;
-  transition: transform 0.15s ease, background 0.15s ease;
-}
+    .drawer .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:10px;
+    }
+    .drawer .meta a{ text-decoration:none; }
 
-.lb-close:hover,
-.lb-prev:hover,
-.lb-next:hover { background: rgba(255,255,255,0.18); }
+    /* --- Lightbox --- */
+    .lightbox{
+      position:fixed;
+      inset:0;
+      background:rgba(10,10,10,.92);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:100;
+      padding:30px;
+    }
+    .lightbox.open{ display:flex; }
 
-.lb-close { top: 18px; right: 18px; }
-.lb-prev { left: 18px; top: 50%; transform: translateY(-50%); }
-.lb-next { right: 18px; top: 50%; transform: translateY(-50%); }
+    .lightbox img{
+      max-width:min(1100px, 92vw);
+      max-height:80vh;
+      object-fit:contain;
+      background:#111;
+      border-radius:16px;
+    }
 
-.lb-caption {
-  position: absolute;
-  bottom: 18px;
-  left: 18px;
-  right: 18px;
-  color: rgba(255,255,255,0.75);
-  font-size: 13px;
-  text-align: center;
-}
+    .lb-close,.lb-prev,.lb-next{
+      position:absolute;
+      border:1px solid rgba(255,255,255,.25);
+      background:rgba(255,255,255,.10);
+      color:#fff;
+      border-radius:999px;
+      padding:10px 14px;
+      cursor:pointer;
+      user-select:none;
+      font-size:14px;
+      transition:background .15s ease;
+    }
+    .lb-close:hover,.lb-prev:hover,.lb-next:hover{ background:rgba(255,255,255,.18); }
 
-/* --- Info drawer --- */
-.drawer-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.35);
-  display: none;
-  z-index: 90;
-}
+    .lb-close{ top:18px; right:18px; }
+    .lb-prev{ left:18px; top:50%; transform:translateY(-50%); }
+    .lb-next{ right:18px; top:50%; transform:translateY(-50%); }
 
-.drawer-overlay.open { display: block; }
+    .lb-caption{
+      position:absolute;
+      bottom:18px;
+      left:18px;
+      right:18px;
+      color:rgba(255,255,255,.75);
+      font-size:13px;
+      text-align:center;
+    }
 
-.drawer {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: -420px;
-  background: #fff;
-  border-top: 1px solid rgba(0,0,0,0.08);
-  border-radius: 22px 22px 0 0;
-  padding: 22px 22px 26px;
-  z-index: 95;
-  transition: bottom 0.25s ease;
-}
+    /* --- Mobile --- */
+    @media (max-width:720px){
+      header{ padding:110px 22px 30px; }
+      .section-title{ padding:0 18px; }
+      .media-scroll{ padding:0 18px; }
 
-.drawer.open { bottom: 0; }
+      .media-scroll__inner{
+        height:min(65vh, 600px);
+        padding:14px;
+        gap:16px;
+      }
 
-.drawer-inner {
-  max-width: 900px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 18px;
-}
-
-.drawer h2 {
-  margin: 0 0 8px;
-  font-size: 18px;
-  font-weight: 520;
-  letter-spacing: -0.02em;
-}
-
-.drawer p {
-  margin: 0 0 10px;
-  color: #444;
-  font-size: 14px;
-}
-
-.drawer .meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.drawer .meta a { text-decoration: none; }
-
-.drawer .drawer-close {
-  position: absolute;
-  right: 16px;
-  top: 14px;
-}
-
-/* Mobile */
-@media (max-width: 700px) {
-  .media {
-    grid-template-columns: 1fr;
-    gap: 24px;
-    padding: 0 20px;
-  }
-
-  .media > *:nth-child(odd) {
-    margin-top: 0;
-  }
-}
-
-
+      .drawer-inner{ grid-template-columns:1fr; }
+      .lb-prev,.lb-next{ display:none; }
+    }
   </style>
 </head>
 
 <body>
-<nav class="topbar">
-  <a class="brand" href="#">Christian Breaux</a>
-  <div class="navlinks">
-    <button class="pill" id="openInfoTop" type="button">info</button>
-  </div>
-</nav>
+  <nav class="topbar">
+    <a class="brand" href="#">Christian Breaux</a>
+    <div class="navlinks">
+      <button class="pill" id="openInfoTop" type="button">info</button>
+    </div>
+  </nav>
 
   <header>
     <h1>Christian Breaux</h1>
-    <p>photo & video production</p>
-
-
+    <p>photo &amp; video production</p>
   </header>
 
-<div class="section-title" id="work">selected lighting work</div>
-<section class="media">
-  <img src="media/media-1.jpg" alt="Assist work for Idris Rheubottom | Ralph Lauren" loading="lazy" />
-  <img src="media/media-2.jpg" alt="Assist work for Idris Rheubottom | Ralph Lauren" loading="lazy" />
-  <img src="media/media-3.jpg" alt="Assist work for JC Dhien | IRK magazine" loading="lazy" />
-  <img src="media/media-4.jpg" alt= "SHAISLIKE | Supreme shot by me" loading="lazy" />
-  <img src="media/media-5.jpg" alt= "Assist work for Thalia Romanos " loading="lazy" />
+  <div class="section-title" id="work">selected lighting work</div>
 
+  <section class="media-scroll" aria-label="Selected lighting work">
+    <div class="media-scroll__inner" id="mediaList">
+      <video
+  muted
+  autoplay
+  loop
+  playsinline
+  preload="metadata"
+  poster="media/reel.mp4"
+>
+  <source src="media/reel.mp4" type="video/mp4">
+</video>
 
+      <img src="media/media-1.jpg" alt="Assist work for Idris Rheubottom | Ralph Lauren" loading="lazy" />
+      <img src="media/media-2.jpg" alt="Assist work for Idris Rheubottom | Ralph Lauren" loading="lazy" />
+      <img src="media/media-3.jpg" alt="Assist work for JC Dhien | IRK magazine" loading="lazy" />
+      <img src="media/media-4.jpg" alt="SHAISLIKE | Supreme shot by me" loading="lazy" />
+      <img src="media/media-5.jpg" alt="Assist work for Thalia Romanos" loading="lazy" />
 
-</section>
+      <!-- Optional: video (uncomment if you want it in the scroll box) -->
+      <!--
+      <video muted autoplay loop playsinline preload="metadata" poster="media/reel.mp4">
+        <source src="media/reel.mp4" type="video/mp4">
+      </video>
+      -->
+    </div>
+  </section>
 
-  <footer>
-    © 2026 Christian Breaux
-  </footer>
-<!-- Info Drawer -->
-<div class="drawer-overlay" id="drawerOverlay" aria-hidden="true"></div>
+  <footer>© 2026 Christian Breaux</footer>
 
-<section class="drawer" id="infoDrawer" aria-label="Info panel" aria-hidden="true">
-  <button class="pill drawer-close" id="closeInfo" type="button">close</button>
+  <!-- Info Drawer -->
+  <div class="drawer-overlay" id="drawerOverlay" aria-hidden="true"></div>
 
-  <div class="drawer-inner">
-    <div>
-      <h2>Info</h2>
-      <p>
-        Photo & video production. NYC-based. Available for shoots, lighting, BTS, and small crews.
-      </p>
-      <div class="meta">
-        <a class="pill" href="mailto:hello@christianbreaux.com">email</a>
-        <a class="pill" href="https://instagram.com/YOURHANDLE" target="_blank" rel="noopener">instagram</a>
-        <a class="pill" href="https://vimeo.com/YOURVIMEO" target="_blank" rel="noopener">vimeo</a>
+  <section class="drawer" id="infoDrawer" aria-label="Info panel" aria-hidden="true">
+    <button class="pill drawer-close" id="closeInfo" type="button">close</button>
+
+    <div class="drawer-inner">
+      <div>
+        <h2>Info</h2>
+        <p>Photo &amp; video production. NYC-based. Available for shoots, lighting, BTS, and small crews.</p>
+        <div class="meta">
+          <a class="pill" href="mailto:hello@christianbreaux.com">email</a>
+          <a class="pill" href="https://instagram.com/YOURHANDLE" target="_blank" rel="noopener">instagram</a>
+          <a class="pill" href="https://vimeo.com/YOURVIMEO" target="_blank" rel="noopener">vimeo</a>
+        </div>
+      </div>
+
+      <div>
+        <h2>Contact</h2>
+        <p><strong>Email:</strong> hello@christianbreaux.com</p>
+        <p><strong>Location:</strong> New York City</p>
+        <p><strong>Services:</strong> production, lighting, camera, post</p>
       </div>
     </div>
+  </section>
 
-    <div>
-      <h2>Contact</h2>
-      <p><strong>Email:</strong> hello@christianbreaux.com</p>
-      <p><strong>Location:</strong> New York City</p>
-      <p><strong>Services:</strong> production, lighting, camera, post</p>
-    </div>
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lb-close" id="lbClose" type="button">close</button>
+    <button class="lb-prev" id="lbPrev" type="button">‹</button>
+    <img id="lbImage" alt="" />
+    <button class="lb-next" id="lbNext" type="button">›</button>
+    <div class="lb-caption" id="lbCaption"></div>
   </div>
-</section>
 
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox" aria-hidden="true">
-  <button class="lb-close" id="lbClose" type="button">close</button>
-  <button class="lb-prev" id="lbPrev" type="button">‹</button>
-  <img id="lbImage" alt="" />
-  <button class="lb-next" id="lbNext" type="button">›</button>
-  <div class="lb-caption" id="lbCaption"></div>
-</div>
-<script>
-  // --- Info Drawer ---
-  const openInfo = () => {
-    infoDrawer.classList.add('open');
-    drawerOverlay.classList.add('open');
-    infoDrawer.setAttribute('aria-hidden', 'false');
-    drawerOverlay.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  };
+  <script>
+    // --- Info Drawer ---
+    const infoDrawer = document.getElementById('infoDrawer');
+    const drawerOverlay = document.getElementById('drawerOverlay');
+    const openInfoTop = document.getElementById('openInfoTop');
+    const closeInfoBtn = document.getElementById('closeInfo');
 
-  const closeInfo = () => {
-    infoDrawer.classList.remove('open');
-    drawerOverlay.classList.remove('open');
-    infoDrawer.setAttribute('aria-hidden', 'true');
-    drawerOverlay.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  };
+    const openInfo = () => {
+      infoDrawer.classList.add('open');
+      drawerOverlay.classList.add('open');
+      infoDrawer.setAttribute('aria-hidden', 'false');
+      drawerOverlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    };
 
-  const infoDrawer = document.getElementById('infoDrawer');
-  const drawerOverlay = document.getElementById('drawerOverlay');
+    const closeInfo = () => {
+      infoDrawer.classList.remove('open');
+      drawerOverlay.classList.remove('open');
+      infoDrawer.setAttribute('aria-hidden', 'true');
+      drawerOverlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
 
-  document.getElementById('openInfo')?.addEventListener('click', openInfo);
-  document.getElementById('openInfoTop')?.addEventListener('click', openInfo);
-  document.getElementById('closeInfo')?.addEventListener('click', closeInfo);
-  drawerOverlay.addEventListener('click', closeInfo);
+    openInfoTop?.addEventListener('click', openInfo);
+    closeInfoBtn?.addEventListener('click', closeInfo);
+    drawerOverlay?.addEventListener('click', closeInfo);
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeInfo();
-      closeLightbox();
+    // --- Lightbox (images only) ---
+    const images = Array.from(document.querySelectorAll('#mediaList img'));
+    const lightbox = document.getElementById('lightbox');
+    const lbImage = document.getElementById('lbImage');
+    const lbCaption = document.getElementById('lbCaption');
+    const lbClose = document.getElementById('lbClose');
+    const lbNext = document.getElementById('lbNext');
+    const lbPrev = document.getElementById('lbPrev');
+
+    let currentIndex = 0;
+
+    function openLightbox(index){
+      currentIndex = index;
+      const img = images[currentIndex];
+      lbImage.src = img.src;
+      lbImage.alt = img.alt || '';
+      lbCaption.textContent = img.alt || '';
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
     }
-  });
 
-  // --- Lightbox Gallery (images only) ---
-  const images = Array.from(document.querySelectorAll('.media img'));
-  const lightbox = document.getElementById('lightbox');
-  const lbImage = document.getElementById('lbImage');
-  const lbCaption = document.getElementById('lbCaption');
-  let currentIndex = 0;
+    function closeLightbox(){
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      lbImage.src = '';
+      document.body.style.overflow = '';
+    }
 
-  function openLightbox(index) {
-    currentIndex = index;
-    const img = images[currentIndex];
-    lbImage.src = img.src;
-    lbImage.alt = img.alt || '';
-    lbCaption.textContent = img.alt || '';
-    lightbox.classList.add('open');
-    lightbox.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  }
+    function showNext(){
+      if (!images.length) return;
+      currentIndex = (currentIndex + 1) % images.length;
+      openLightbox(currentIndex);
+    }
 
-  function closeLightbox() {
-    lightbox.classList.remove('open');
-    lightbox.setAttribute('aria-hidden', 'true');
-    lbImage.src = '';
-    document.body.style.overflow = '';
-  }
+    function showPrev(){
+      if (!images.length) return;
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      openLightbox(currentIndex);
+    }
 
-  function showNext() {
-    currentIndex = (currentIndex + 1) % images.length;
-    openLightbox(currentIndex);
-  }
+    images.forEach((img, idx) => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => openLightbox(idx));
+    });
 
-  function showPrev() {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    openLightbox(currentIndex);
-  }
+    lbClose?.addEventListener('click', closeLightbox);
+    lbNext?.addEventListener('click', showNext);
+    lbPrev?.addEventListener('click', showPrev);
 
-  images.forEach((img, idx) => {
-    img.style.cursor = 'zoom-in';
-    img.addEventListener('click', () => openLightbox(idx));
-  });
+    lightbox?.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
 
-  document.getElementById('lbClose').addEventListener('click', closeLightbox);
-  document.getElementById('lbNext').addEventListener('click', showNext);
-  document.getElementById('lbPrev').addEventListener('click', showPrev);
-
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) closeLightbox();
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (!lightbox.classList.contains('open')) return;
-    if (e.key === 'ArrowRight') showNext();
-    if (e.key === 'ArrowLeft') showPrev();
-  });
-</script>
-
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeInfo();
+        closeLightbox();
+      }
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'ArrowRight') showNext();
+      if (e.key === 'ArrowLeft') showPrev();
+    });
+  </script>
 </body>
 </html>
