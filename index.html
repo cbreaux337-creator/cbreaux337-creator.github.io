@@ -56,26 +56,43 @@ header p {
 }
 
 .media {
-  max-width: 1800px;
-  margin: 60px auto 100px;
-  padding: 0 40px;
+  max-width: 1400px;
+  margin: 44px auto 90px;
+  padding: 0 28px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
-  gap: 32px;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 22px;
 }
 
+/* default: 2-up look on desktop */
+.media > * {
+  grid-column: span 6;
+}
 
+/* flow: stagger rows slightly */
+@media (min-width: 900px) {
+  .media > *:nth-child(3n + 2) { margin-top: 18px; }
+  .media > *:nth-child(3n)     { margin-top: 36px; }
+}
+
+/* media styling */
 .media img,
-    .media > *:nth-child(odd) {
-  margin-top: 24px;
-}
-
 .media video {
   width: 100%;
-  height: 100%;
+  height: auto;
+  display: block;
   object-fit: cover;
-  aspect-ratio: 4 / 3;
   background: #f2f2f2;
+  /* remove rounded edges */
+  border-radius: 0;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+  .media { grid-template-columns: 1fr; gap: 18px; padding: 0 18px; }
+  .media > * { grid-column: auto; margin-top: 0; }
+}
+
 }
 
 }
@@ -309,6 +326,9 @@ header { padding-top: 120px; }
   <img src="media/media-2.jpg" alt="Video frame" loading="lazy" />
   <img src="media/media-3.jpg" alt="Behind the scenes" loading="lazy" />
   <img src="media/media-4.jpg" alt="Lighting setup" loading="lazy" />
+
+  <video src="media/reel.mp4" playsinline controls preload="metadata" poster="media/media-1.jpg"></video>
+
 </section>
 
   <footer>
