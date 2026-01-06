@@ -266,6 +266,111 @@ header { padding-top: 120px; }
     margin-top: 0;
   }
 }
+/* --- Slideshow --- */
+.slideshow {
+  max-width: 1400px;
+  margin: 36px auto 90px;
+  padding: 0 32px;
+  position: relative;
+}
+
+.slides {
+  position: relative;
+  overflow: hidden;
+  background: #f2f2f2;
+}
+
+.slide {
+  display: none;
+  width: 100%;
+}
+
+.slide.is-active {
+  display: block;
+}
+
+.slide img,
+.slide video {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  /* flowy/tall feel without being absurd */
+  max-height: 78vh;
+}
+
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 999px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+  color: #111;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.nav:hover {
+  background: rgba(255,255,255,0.95);
+  border-color: rgba(0,0,0,0.2);
+}
+
+.nav.prev { left: 12px; }
+.nav.next { right: 12px; }
+
+.ui {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.caption {
+  font-size: 14px;
+  color: #444;
+}
+
+.dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.25);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.dot.is-active {
+  background: #111;
+  border-color: #111;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .slideshow { padding: 0 18px; }
+  .nav { display: none; } /* swipe + dots instead */
+  .ui { flex-direction: column; align-items: flex-start; }
+  .dots { justify-content: flex-start; }
+  .slide img, .slide video { max-height: 70vh; }
+}
 
 
 
@@ -292,12 +397,38 @@ header { padding-top: 120px; }
   </header>
 
 <div class="section-title" id="work">selected work</div>
-<section class="media">
-  <img src="media/media-1.jpg" alt="Production still" loading="lazy" />
-  <img src="media/media-2.jpg" alt="Video frame" loading="lazy" />
-  <img src="media/media-3.jpg" alt="Behind the scenes" loading="lazy" />
-  <img src="media/media-4.jpg" alt="Lighting setup" loading="lazy" />
+<div class="section-title" id="work">selected work</div>
+
+<section class="slideshow" aria-label="Selected work slideshow">
+  <div class="slides" id="slides">
+    <div class="slide is-active">
+      <img src="media/media-1.jpg" alt="Production still" />
+    </div>
+    <div class="slide">
+      <img src="media/media-2.jpg" alt="Video frame" />
+    </div>
+    <div class="slide">
+      <img src="media/media-3.jpg" alt="Behind the scenes" />
+    </div>
+    <div class="slide">
+      <img src="media/media-4.jpg" alt="Lighting setup" />
+    </div>
+
+    <!-- Optional: video slide -->
+    <div class="slide">
+      <video src="media/reel.mp4" playsinline controls preload="metadata"></video>
+    </div>
+  </div>
+
+  <button class="nav prev" type="button" aria-label="Previous slide" id="prevBtn">‹</button>
+  <button class="nav next" type="button" aria-label="Next slide" id="nextBtn">›</button>
+
+  <div class="ui">
+    <div class="caption" id="caption">Production still</div>
+    <div class="dots" id="dots" aria-label="Slide navigation"></div>
+  </div>
 </section>
+
 
   <footer>
     © 2026 Christian Breaux
